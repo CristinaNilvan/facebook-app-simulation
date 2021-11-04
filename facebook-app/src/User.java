@@ -1,14 +1,11 @@
-public class User {
-    private static final int MAX_NO_FRIENDS = 1000;
-    private static final int MAX_NO_PAGES = 10000;
+import java.util.ArrayList;
 
+public class User {
     private String userName;
     private String password;
     private String fullName;
-    private int noFriends;
-    private User[] listOfFriends =  new User[MAX_NO_FRIENDS];
-    private int noLikedPages;
-    private Page[] likedPages = new Page[MAX_NO_PAGES];
+    private ArrayList<User> listOfFriends = new ArrayList<>();
+    private ArrayList<Page> likedPages = new ArrayList<>();
     private String status;
 
     public User(String userName, String password, String fullName, String status) {
@@ -27,11 +24,11 @@ public class User {
     }
 
     public int getNoFriends() {
-        return noFriends;
+        return listOfFriends.size();
     }
 
     public int getNoLikedPages() {
-        return noLikedPages;
+        return likedPages.size();
     }
 
     public String getStatus() {
@@ -39,53 +36,53 @@ public class User {
     }
 
     public void displayFriends() {
-        for (int i = 0; i < noFriends; i++) {
-            System.out.print(listOfFriends[i].getFullName() + "  ");
+        for (User friend :
+                listOfFriends) {
+            System.out.print(friend.getFullName() + "  ");
         }
+
         System.out.println();
     }
 
     public void displayLikedPages() {
-        for (int i = 0; i < noLikedPages; i++) {
-            System.out.print(likedPages[i].getName() + "  ");
+        for (Page page :
+                likedPages) {
+            System.out.print(page.getName() + "  ");
         }
+
         System.out.println();
     }
 
     public void addFriend(User newFriend) {
-        listOfFriends[noFriends] = newFriend;
-        noFriends += 1;
+        listOfFriends.add(newFriend);
     }
 
     public void likePage(Page newPage) {
-        likedPages[noLikedPages] = newPage;
-        noLikedPages += 1;
+        likedPages.add(newPage);
     }
 
     public void findSingleFriends() {
-        for (int i = 0; i < noFriends; i++) {
-            if (listOfFriends[i].getStatus().equals("single")) {
-                System.out.print(listOfFriends[i].getFullName() + "  ");
-            }
+        for (User friend :
+                listOfFriends) {
+            if (friend.getStatus().equals("single"))
+                System.out.print(friend.getFullName() + "  ");
         }
     }
 
     public void addAdministrators() {
-        for (int i = 0; i < noLikedPages; i++) {
-            addFriend(likedPages[i].getAdministrator());
+        for (Page page :
+                likedPages) {
+            addFriend(page.getAdministrator());
         }
     }
 
     public void deletePages() {
-        for (int i = 0; i < noLikedPages; i++) {
-            if ((likedPages[i].getDomainOfActivity().equals("politics")) ||
-                    (likedPages[i].getDomainOfActivity().equals("economy"))) {
-                if (noLikedPages - 1 - i >= 0)
-                    System.arraycopy(likedPages, i + 1, likedPages, i, noLikedPages - 1 - i);
-
-                    i -= 1;
-                    noLikedPages -= 1;
-                }
+        for (int i = 0; i < likedPages.size(); i++) {
+            if ((likedPages.get(i).getDomainOfActivity().equals("politics")) ||
+                    (likedPages.get(i).getDomainOfActivity().equals("economy"))) {
+                likedPages.remove(i);
+                i -= 1;
             }
+        }
     }
 }

@@ -8,10 +8,10 @@ public class Main {
         User user05 = new User("ama.green", "pass", "Amanda Green", "married");
         User user06 = new User("fred.ross", "pass", "Fred Ross", "single");
 
-        Page page01 = new Page("Eco-Eco","economy", "desc", user01);
-        Page page02 = new Page("PNL","politics", "desc", user02);
-        Page page03 = new Page("Econ","economy", "desc", user03);
-        Page page04 = new Page("UTCN-AC","education", "desc", user04);
+        Page page01 = new Page("Eco-Eco", "economy", "desc", user01);
+        Page page02 = new Page("PNL", "politics", "desc", user02);
+        Page page03 = new Page("Econ", "economy", "desc", user03);
+        Page page04 = new Page("UTCN-AC", "education", "desc", user04);
 
         user01.addFriend(user05);
         user01.addFriend(user06);
